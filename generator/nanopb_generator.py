@@ -321,7 +321,7 @@ class ProtoElement(object):
 
         # Obtain SourceCodeInfo.Location object containing comment
         # information (based on the member path)
-        comment = self.comments.get(str(path))
+        comment = self.comments.get_value(str(path))
 
         leading_comment = ""
         trailing_comment = ""
@@ -855,7 +855,7 @@ class Field:
                 other_dependencies = dict(x for x in dependencies.items() if x[0] != str(self.struct_name))
                 encsize = submsg.encoded_size(other_dependencies)
 
-                my_msg = dependencies.get(str(self.struct_name))
+                my_msg = dependencies.get_value(str(self.struct_name))
                 external = (not my_msg or submsg.protofile != my_msg.protofile)
 
                 if encsize and encsize.symbols and external:
